@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Python Game Links</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 30px;
+            background: #f0f0f0;
+        }
+        .button {
+            display: inline-block;
+            margin: 10px;
+            padding: 15px 25px;
+            font-size: 18px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 8px;
+        }
+        .links {
+            margin: 10px 0 20px 20px;
+            display: none;
+            background: #fff;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .links a {
+            display: block;
+            margin: 5px 0;
+            color: #007acc;
+            text-decoration: none;
+        }
+        .links a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h2>Python Game Versions</h2>
+
+    <!-- Button 1 -->
+    <button class="button" onclick="toggleLinks('links1')">Wersja 1.0</button>
+    <div class="links" id="links1">
+        <a href="https://raw.githubusercontent.com/Dawcio232/1-python-game/refs/heads/main/version%201.0.py" target="_blank">Raw</a>
+        <a href="https://github.com/Dawcio232/1-python-game/blob/main/version%201.0.py" target="_blank">GitHub</a>
+    </div>
+
+    <!-- Button 2 -->
+    <button class="button" onclick="toggleLinks('links2')">Wersja 2.0</button>
+    <div class="links" id="links2">
+        <a href="https://raw.githubusercontent.com/Dawcio232/1-python-game/refs/heads/main/version%202.0.py" target="_blank">Raw</a>
+        <a href="https://github.com/Dawcio232/1-python-game/blob/main/version%202.0.py" target="_blank">GitHub</a>
+    </div>
+
+    <!-- Play Game Button -->
+    <br>
+    <button class="button" onclick="window.open('https://script-embedder--dawid232v2.replit.app','_blank')">Zagraj w grę</button>
+
+    <script>
+        function toggleLinks(id) {
+            const el = document.getElementById(id);
+            // hide all other links first
+            document.querySelectorAll('.links').forEach(div => {
+                if(div.id !== id) div.style.display = 'none';
+            });
+            // toggle current
+            el.style.display = (el.style.display === 'block') ? 'none' : 'block';
+        }
+    </script>
+</body>
+</html>
