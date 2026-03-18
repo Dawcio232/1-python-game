@@ -2,410 +2,150 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Python Game Versions</title>
+    <title>SUPER HUB 2003</title>
     <style>
-        * {
-            box-sizing: border-box;
-        }
-
         body {
-            margin: 0;
-            min-height: 100vh;
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: radial-gradient(circle at top, #1e293b 0, #020617 45%, #000 100%);
-            color: #e5e7eb;
-        }
-
-        .wrapper {
-            width: 100%;
-            padding: 20px;
-        }
-
-        .card {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 32px 24px;
-            border-radius: 24px;
-            background: rgba(15, 23, 42, 0.75);
-            box-shadow:
-                0 18px 45px rgba(15, 23, 42, 0.9),
-                0 0 0 1px rgba(148, 163, 184, 0.15);
-            backdrop-filter: blur(22px);
-        }
-
-        .header {
+            font-family: Arial, sans-serif;
+            padding: 30px;
+            background: #000;
+            color: #0f0;
             text-align: center;
-            margin-bottom: 24px;
+            overflow-x: hidden;
         }
 
-        .title {
-            font-size: 28px;
-            letter-spacing: 0.06em;
-            text-transform: uppercase;
-            color: #e5e7eb;
+        h1 {
+            font-size: 40px;
+            text-shadow: 0 0 10px #0f0;
+            margin-bottom: 10px;
         }
 
-        .subtitle {
-            font-size: 14px;
-            color: #9ca3af;
-            margin-top: 4px;
-        }
-
-        .versions-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220, 1fr));
-            gap: 16px;
-            margin-bottom: 24px;
-        }
-
-        .version-item {
-            position: relative;
-            border-radius: 18px;
-            padding: 14px 14px 10px;
-            background: radial-gradient(circle at 0 0, rgba(59, 130, 246, 0.22), transparent 55%),
-                        radial-gradient(circle at 100% 100%, rgba(251, 191, 36, 0.18), transparent 45%),
-                        rgba(15, 23, 42, 0.9);
-            box-shadow: 0 10px 28px rgba(15, 23, 42, 0.8);
+        .marquee {
+            width: 100%;
+            white-space: nowrap;
             overflow: hidden;
+            box-sizing: border-box;
+            border: 3px dashed #ff0;
+            padding: 5px 0;
+            margin-bottom: 20px;
         }
 
-        .version-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 8px;
+        .marquee span {
+            display: inline-block;
+            padding-left: 100%;
+            animation: scroll-text 10s linear infinite;
+            font-weight: bold;
+            color: #ff0;
         }
 
-        .version-label {
-            font-size: 16px;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+        @keyframes scroll-text {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-100%); }
         }
 
-        .version-badge {
-            font-size: 11px;
-            padding: 2px 8px;
-            border-radius: 999px;
-            border: 1px solid rgba(148, 163, 184, 0.4);
-            color: #9ca3af;
-        }
-
-        .toggle-btn {
-            border: none;
-            border-radius: 999px;
-            padding: 8px 14px;
-            font-size: 13px;
-            font-weight: 500;
-            cursor: pointer;
-            color: #e5e7eb;
-            background: linear-gradient(135deg, #22c55e, #16a34a);
-            box-shadow: 0 8px 18px rgba(22, 163, 74, 0.55);
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            transition:
-                transform 0.08s ease-out,
-                box-shadow 0.12s ease-out,
-                filter 0.12s ease-out,
-                background 0.2s ease-out;
-        }
-
-        .toggle-btn:hover {
-            filter: brightness(1.05);
-            transform: translateY(-1px);
-            box-shadow: 0 10px 22px rgba(22, 163, 74, 0.7);
-        }
-
-        .toggle-btn:active {
-            transform: translateY(0);
-            box-shadow: 0 4px 10px rgba(22, 163, 74, 0.55);
-        }
-
-        .toggle-icon {
-            font-size: 14px;
-        }
-
-        .links {
-            margin-top: 10px;
-            border-radius: 14px;
-            background: rgba(15, 23, 42, 0.95);
-            border: 1px solid rgba(148, 163, 184, 0.35);
-            padding: 10px 10px 8px;
-            display: grid;
-            gap: 8px;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            opacity: 0;
-            max-height: 0;
-            overflow: hidden;
-            transform: translateY(-6px);
-            transition:
-                opacity 0.18s ease-out,
-                max-height 0.18s ease-out,
-                transform 0.18s ease-out;
-        }
-
-        .links.active {
-            opacity: 1;
-            max-height: 200px;
-            transform: translateY(0);
-        }
-
-        .link-pill {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 6px;
-            padding: 8px 10px;
-            border-radius: 12px;
-            background: radial-gradient(circle at 0 0, rgba(56, 189, 248, 0.4), transparent 75%);
-            color: #e0f2fe;
-            font-size: 13px;
-            text-decoration: none;
-            border: 1px solid rgba(59, 130, 246, 0.55);
-            box-shadow: 0 5px 14px rgba(37, 99, 235, 0.45);
-            transition:
-                transform 0.08s ease-out,
-                box-shadow 0.12s ease-out,
-                background 0.18s ease-out,
-                border-color 0.18s ease-out;
-        }
-
-        .link-pill span {
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-        }
-
-        .link-pill small {
-            font-size: 11px;
-            opacity: 0.85;
-        }
-
-        .link-pill:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 8px 18px rgba(37, 99, 235, 0.65);
-            border-color: rgba(96, 165, 250, 0.85);
-            background: radial-gradient(circle at 0 0, rgba(96, 165, 250, 0.85), transparent 80%);
-        }
-
-        .link-pill:active {
-            transform: translateY(0);
-            box-shadow: 0 4px 10px rgba(37, 99, 235, 0.5);
-        }
-
-        .play-section {
-            margin-top: 6px;
-            padding-top: 18px;
-            border-top: 1px dashed rgba(148, 163, 184, 0.45);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .play-label {
-            font-size: 13px;
-            color: #9ca3af;
-            text-transform: uppercase;
-            letter-spacing: 0.16em;
-        }
-
-        .play-button {
-            border: none;
-            border-radius: 999px;
-            padding: 13px 24px;
-            font-size: 15px;
-            font-weight: 600;
-            cursor: pointer;
-            color: #0b1120;
-            background: conic-gradient(from 210deg, #fb923c, #f97316, #facc15, #fb923c);
-            box-shadow:
-                0 18px 38px rgba(248, 113, 113, 0.32),
-                0 0 0 1px rgba(251, 191, 36, 0.8);
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            text-transform: uppercase;
-            letter-spacing: 0.14em;
-            transition:
-                transform 0.12s ease-out,
-                box-shadow 0.16s ease-out,
-                filter 0.16s ease-out;
-        }
-
-        .play-button:hover {
-            transform: translateY(-2px) scale(1.01);
-            filter: brightness(1.05);
-            box-shadow:
-                0 22px 48px rgba(248, 113, 113, 0.48),
-                0 0 0 1px rgba(250, 204, 21, 0.9);
-        }
-
-        .play-button:active {
-            transform: translateY(0) scale(0.99);
-            box-shadow:
-                0 10px 22px rgba(248, 113, 113, 0.38),
-                0 0 0 1px rgba(250, 204, 21, 0.75);
-        }
-
-        .play-icon {
+        .spin-text {
+            display: inline-block;
             font-size: 18px;
+            color: #0ff;
+            margin-bottom: 20px;
+            animation: spin 4s linear infinite;
+            text-shadow: 0 0 5px #0ff;
         }
 
-        @media (max-width: 640px) {
-            .card {
-                padding: 24px 18px;
-            }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
 
-            .title {
-                font-size: 22px;
-            }
+        .button {
+            display: inline-block;
+            margin: 20px;
+            padding: 30px 50px;
+            font-size: 26px;
+            cursor: pointer;
+            background: #4CAF50;
+            color: white;
+            border: 5px ridge #fff;
+            border-radius: 8px;
+            text-transform: uppercase;
+            box-shadow: 0 0 20px #4CAF50;
+            animation: pulse 1.2s infinite alternate;
+        }
 
-            .versions-grid {
-                grid-template-columns: minmax(0, 1fr);
-            }
+        .button.premium {
+            background: #ff00ff;
+            box-shadow: 0 0 25px #ff00ff;
+        }
 
-            .links {
-                grid-template-columns: minmax(0, 1fr);
-            }
+        .button.still {
+            background: #0000ff;
+            box-shadow: 0 0 25px #0000ff;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.08); }
+        }
+
+        .hint {
+            margin-top: 30px;
+            font-size: 14px;
+            color: #f00;
+            text-shadow: 0 0 4px #f00;
+            animation: blink 0.7s steps(1) infinite;
+        }
+
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        .stars {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            background-image:
+                radial-gradient(circle, #0f0 1px, transparent 1px),
+                radial-gradient(circle, #0ff 1px, transparent 1px);
+            background-size: 80px 80px, 130px 130px;
+            opacity: 0.35;
+            animation: star-move 20s linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes star-move {
+            0% { transform: translate(0,0); }
+            100% { transform: translate(-80px,-80px); }
         }
     </style>
 </head>
 <body>
-<div class="wrapper">
-    <div class="card">
-        <header class="header">
-            <h1 class="title">Python Game Versions</h1>
-            <p class="subtitle">Wybierz wersję gry, pobierz kod albo uruchom grę online.</p>
-        </header>
+    <div class="stars"></div>
 
-        <section class="versions-grid">
-            <!-- Version 1.0 -->
-            <article class="version-item">
-                <div class="version-header">
-                    <div class="version-label">
-                        <span>Wersja 1.0</span>
-                        <span class="version-badge">Stabilna</span>
-                    </div>
-                    <button class="toggle-btn" onclick="toggleLinks('links1')" aria-expanded="false" aria-controls="links1">
-                        <span class="toggle-icon">▼</span>
-                        <span>Linki</span>
-                    </button>
-                </div>
-                <div class="links" id="links1">
-                    <a class="link-pill"
-                       href="https://raw.githubusercontent.com/Dawcio232/1-python-game/refs/heads/main/version%201.0.py"
-                       target="_blank"
-                       rel="noopener">
-                        <span>Raw</span>
-                        <small>.py</small>
-                    </a>
-                    <a class="link-pill"
-                       href="https://github.com/Dawcio232/1-python-game/blob/main/version%201.0.py"
-                       target="_blank"
-                       rel="noopener">
-                        <span>GitHub</span>
-                        <small>Repo</small>
-                    </a>
-                </div>
-            </article>
+    <h1>WITAJ W SUPER HUBIE</h1>
 
-            <!-- Version 2.0 -->
-            <article class="version-item">
-                <div class="version-header">
-                    <div class="version-label">
-                        <span>Wersja 2.0</span>
-                        <span class="version-badge">Rozszerzona</span>
-                    </div>
-                    <button class="toggle-btn" onclick="toggleLinks('links2')" aria-expanded="false" aria-controls="links2">
-                        <span class="toggle-icon">▼</span>
-                        <span>Linki</span>
-                    </button>
-                </div>
-                <div class="links" id="links2">
-                    <a class="link-pill"
-                       href="https://raw.githubusercontent.com/Dawcio232/1-python-game/refs/heads/main/version%202.0.py"
-                       target="_blank"
-                       rel="noopener">
-                        <span>Raw</span>
-                        <small>.py</small>
-                    </a>
-                    <a class="link-pill"
-                       href="https://github.com/Dawcio232/1-python-game/blob/main/version%202.0.py"
-                       target="_blank"
-                       rel="noopener">
-                        <span>GitHub</span>
-                        <small>Repo</small>
-                    </a>
-                </div>
-            </article>
-
-            <!-- Version 3.0 -->
-            <article class="version-item">
-                <div class="version-header">
-                    <div class="version-label">
-                        <span>Wersja 3.0</span>
-                        <span class="version-badge">Najnowsza</span>
-                    </div>
-                    <button class="toggle-btn" onclick="toggleLinks('links3')" aria-expanded="false" aria-controls="links3">
-                        <span class="toggle-icon">▼</span>
-                        <span>Linki</span>
-                    </button>
-                </div>
-                <div class="links" id="links3">
-                    <a class="link-pill"
-                       href="https://raw.githubusercontent.com/Dawcio232/1-python-game/refs/heads/main/version%203.0.py"
-                       target="_blank"
-                       rel="noopener">
-                        <span>Raw</span>
-                        <small>.py</small>
-                    </a>
-                    <a class="link-pill"
-                       href="https://github.com/Dawcio232/1-python-game/blob/main/version%203.0.py"
-                       target="_blank"
-                       rel="noopener">
-                        <span>GitHub</span>
-                        <small>Repo</small>
-                    </a>
-                </div>
-            </article>
-        </section>
-
-        <section class="play-section">
-            <span class="play-label">Zagraj teraz</span>
-            <button class="play-button" onclick="window.open('https://script-embedder--dawid232v2.replit.app','_blank')">
-                <span class="play-icon">▶</span>
-                <span>Uruchom grę</span>
-            </button>
-        </section>
+    <div class="marquee">
+        <span>UWAGA! KOSMICZNY HUB PRZEGLĄDARKI GIER PYTHON!!! UWAGA! KOSMICZNY HUB PRZEGLĄDARKI GIER PYTHON!!!</span>
     </div>
-</div>
 
-<script>
-    function toggleLinks(id) {
-        const current = document.getElementById(id);
-        const isActive = current.classList.contains('active');
+    <div class="spin-text">
+        OBRACAM SIĘ, WIĘC TO NA PEWNO JEST PROFESJONALNE
+    </div>
 
-        document.querySelectorAll('.links').forEach(div => {
-            if (div.id !== id) {
-                div.classList.remove('active');
-                const btn = div.parentElement.querySelector('.toggle-btn');
-                if (btn) btn.setAttribute('aria-expanded', 'false');
-            }
-        });
+    <div>
+        <button class="button premium"
+                onclick="location.href='https://dawcio232.github.io/1-python-game/premium'">
+            PREMIUM
+        </button>
 
-        current.classList.toggle('active');
-        const button = current.parentElement.querySelector('.toggle-btn');
-        if (button) {
-            button.setAttribute('aria-expanded', String(!isActive));
-        }
-    }
-</script>
+        <button class="button still"
+                onclick="location.href='https://dawcio232.github.io/1-python-game/still'">
+            STILL
+        </button>
+    </div>
+
+    <div class="hint">
+        KLIKNIJ COŚ, ZANIM PRZEGLĄDARKA WYBUCHNIE
+    </div>
 </body>
 </html>
