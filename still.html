@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Python Game Versions - STILL</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 30px;
+            background: #101010;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        h2 {
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin-bottom: 25px;
+            text-shadow: 0 0 6px #0ff;
+            animation: header-wobble 1.8s ease-in-out infinite;
+        }
+
+        @keyframes header-wobble {
+            0%,100% { transform: translateX(0); }
+            25% { transform: translateX(3px); }
+            50% { transform: translateX(-3px); }
+            75% { transform: translateX(2px); }
+        }
+
+        .button {
+            display: inline-block;
+            margin: 10px;
+            padding: 15px 25px;
+            font-size: 18px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: 3px outset #ffffff;
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+            text-transform: uppercase;
+            box-shadow: 0 0 12px rgba(0,255,0,0.6);
+            animation: btn-pulse 1.2s infinite alternate;
+        }
+
+        @keyframes btn-pulse {
+            0% { transform: scale(1); box-shadow: 0 0 6px rgba(0,255,0,0.5); }
+            100% { transform: scale(1.06); box-shadow: 0 0 16px rgba(0,255,0,1); }
+        }
+
+        .button::after {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -30%;
+            width: 60%;
+            height: 200%;
+            background: linear-gradient(120deg, transparent, rgba(255,255,255,0.7), transparent);
+            transform: translateX(-100%);
+            animation: button-shine 2.1s infinite;
+        }
+
+        @keyframes button-shine {
+            0% { transform: translateX(-120%); }
+            50% { transform: translateX(120%); }
+            100% { transform: translateX(120%); }
+        }
+
+        .links {
+            margin: 10px 0 20px 20px;
+            display: none;
+            background: #181818;
+            padding: 10px;
+            border-radius: 5px;
+            border: 2px dashed #00ffff;
+            box-shadow: 0 0 10px rgba(0,255,255,0.4);
+            animation: links-flicker 1.5s infinite;
+        }
+
+        @keyframes links-flicker {
+            0%, 100% { opacity: 1; }
+            20% { opacity: 0.95; }
+            40% { opacity: 0.7; }
+            60% { opacity: 1; }
+            80% { opacity: 0.85; }
+        }
+
+        .links a {
+            display: block;
+            margin: 5px 0;
+            color: #00b7ff;
+            text-decoration: none;
+            font-weight: bold;
+            position: relative;
+        }
+
+        .links a:hover {
+            text-decoration: underline;
+        }
+
+        .links a::before {
+            content: "★";
+            margin-right: 4px;
+            color: #ff0;
+            animation: star-spin 1.3s linear infinite;
+        }
+
+        @keyframes star-spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .ticker {
+            margin-top: 15px;
+            border-top: 2px solid #333;
+            padding-top: 10px;
+            font-size: 13px;
+            color: #ff00ff;
+            white-space: nowrap;
+            overflow: hidden;
+            box-sizing: border-box;
+        }
+
+        .ticker span {
+            display: inline-block;
+            padding-left: 100%;
+            animation: ticker-move 15s linear infinite;
+        }
+
+        @keyframes ticker-move {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-100%); }
+        }
+
+        .bg-lines {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            background-image:
+                linear-gradient(90deg, rgba(0,255,255,0.08) 1px, transparent 1px),
+                linear-gradient(180deg, rgba(0,255,0,0.08) 1px, transparent 1px);
+            background-size: 40px 40px;
+            opacity: 0.4;
+            mix-blend-mode: screen;
+            animation: bg-scroll 20s linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes bg-scroll {
+            0% { transform: translate(0,0); }
+            100% { transform: translate(-40px,-40px); }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-lines"></div>
+
+    <h2>Python Game Versions (STILL)</h2>
+
+    <!-- Button 1 -->
+    <button class="button" onclick="toggleLinks('links1')">Wersja 1.0</button>
+    <div class="links" id="links1">
+        <a href="https://raw.githubusercontent.com/Dawcio232/1-python-game/refs/heads/main/version%201.0.py" target="_blank">Raw</a>
+        <a href="https://github.com/Dawcio232/1-python-game/blob/main/version%201.0.py" target="_blank">GitHub</a>
+    </div>
+
+    <!-- Button 2 -->
+    <button class="button" onclick="toggleLinks('links2')">Wersja 2.0</button>
+    <div class="links" id="links2">
+        <a href="https://raw.githubusercontent.com/Dawcio232/1-python-game/refs/heads/main/version%202.0.py" target="_blank">Raw</a>
+        <a href="https://github.com/Dawcio232/1-python-game/blob/main/version%202.0.py" target="_blank">GitHub</a>
+    </div>
+
+    <!-- Button 3 -->
+    <button class="button" onclick="toggleLinks('links3')">Wersja 3.0</button>
+    <div class="links" id="links3">
+        <a href="https://raw.githubusercontent.com/Dawcio232/1-python-game/refs/heads/main/version%203.0.py" target="_blank">Raw</a>
+        <a href="https://github.com/Dawcio232/1-python-game/blob/main/version%203.0.py" target="_blank">GitHub</a>
+    </div>
+
+    <!-- Play Game Button -->
+    <br>
+    <button class="button" onclick="window.open('https://script-embedder--dawid232v2.replit.app','_blank')">
+        Zagraj w grę
+    </button>
+
+    <div class="ticker">
+        <span>THIS IS TOTALLY STILL VERSION. NIC SIĘ NIE RUSZA. WSZYSTKO JEST BARDZO STABILNE. ABSOLUTNIE ZERO ANIMACJI. &nbsp; • &nbsp; PYTHON GAME EXPERIENCE 1999 EDITION • &nbsp;</span>
+    </div>
+
+    <script>
+        function toggleLinks(id) {
+            const el = document.getElementById(id);
+            document.querySelectorAll('.links').forEach(div => {
+                if (div.id !== id) div.style.display = 'none';
+            });
+            el.style.display = (el.style.display === 'block') ? 'none' : 'block';
+        }
+    </script>
+</body>
+</html>
