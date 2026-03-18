@@ -1,6 +1,6 @@
 # ┌───────────────────────────────────────────────┐
 # │                                               │
-# │               Gra python 1 v2.0               │
+# │               Gra python 1 v3.0               │
 # │                                               │
 # │ Autor: Dawcio232                              │
 # │ GitHub: Dawcio232                             │
